@@ -1,0 +1,19 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+        compatible = "hobot,x3";
+
+        fragment@0 {
+		target-path = "/reserved-memory/ion_cma";
+		frag0: __overlay__ {
+			alloc-ranges = <0x00000000 0x04000000 0x00000000 0x2a000000>;
+			size = <0x00000000 0x2a000000>;
+		};
+	};
+
+	__overrides__ {
+		size = <&frag0>,"alloc-ranges:12",
+			   <&frag0>,"size:4";
+	};
+};

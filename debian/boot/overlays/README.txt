@@ -1,0 +1,1 @@
+dtc -I dts -O dtb -o ./dtoverlay_spi5_spidev.dtbo ./dtoverlay_spi5_spidev.dts

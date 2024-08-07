@@ -1,0 +1,21 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+  fragment@0 {
+    target-path = "/soc/a55_apb0/spi@34050000";
+    __overlay__ {
+
+      #address-cells = <1>;
+      #size-cells = <0>;
+
+      spidev@0 {
+        compatible = "dr,x5-spidev";
+        spi-max-frequency = <32000000>;
+        reg = <0>;
+      };
+
+    };
+  };
+};
+

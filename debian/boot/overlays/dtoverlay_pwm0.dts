@@ -1,0 +1,71 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+  fragment@0 {
+    target-path = "/soc/a55_apb0/spi@34010000";
+    __overlay__ {
+
+      status = "disabled";
+
+    };
+  };
+
+  fragment@1 {
+    target-path = "/soc/a55_apb0/gpio@34120000/";
+    __overlay__ {
+		ls_gpio0_porta{
+      pinctrl-0 = < &lsio_gpio0_0
+              &lsio_gpio0_1
+              &lsio_gpio0_2
+              &lsio_gpio0_3
+              &lsio_gpio0_8
+              &lsio_gpio0_9
+              /* &lsio_gpio0_20 */
+              /* &lsio_gpio0_21 */
+              &lsio_gpio0_22
+              &lsio_gpio0_23
+              &dsp_gpio0_9
+            >;
+        };
+    };
+  };
+
+  fragment@4 {
+    target-path = "/soc/a55_apb0/pwm@34140000";
+    __overlay__ {
+
+      status = "okay";
+
+    };
+  };
+
+  fragment@5 {
+    target-path = "/soc/a55_apb0/pwm@34150000";
+    __overlay__ {
+
+      status = "disabled";
+
+    };
+  };
+
+  fragment@6 {
+    target-path = "/soc/a55_apb0/pwm@34160000";
+    __overlay__ {
+
+      status = "disabled";
+
+    };
+  };
+
+  fragment@7 {
+    target-path = "/soc/a55_apb0/pwm@34170000";
+    __overlay__ {
+
+      status = "disabled";
+
+    };
+  };
+
+};
+

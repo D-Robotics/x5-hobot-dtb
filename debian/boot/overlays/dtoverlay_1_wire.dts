@@ -1,0 +1,21 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+  fragment {
+    target-path = "/";
+    __overlay__ {
+
+      onewire {
+        status = "okay";
+        compatible = "w1-gpio";
+        linux,open-drain;
+        pinctrl-names = "default";
+        pinctrl-0 = <&lsio_gpio0_22>;
+        gpios = <&ls_gpio0_porta 22 1>;
+      };
+    };
+  };
+};
+
+

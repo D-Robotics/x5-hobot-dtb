@@ -1,0 +1,67 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+  fragment@0 {
+    target-path = "/";
+    __overlay__ {
+      imx477_clk0: imx477_clk0 {
+        compatible = "fixed-clock";
+        #clock-cells = <0>;
+        status = "okay";
+        clock-frequency = <24000000>;
+      };
+    };
+  };
+
+  fragment@1 {
+    target-path = "/soc/a55_apb0/i2c@341d0000/";
+    __overlay__ {
+
+      #address-cells = <1>;
+      #size-cells = <0>;
+
+      imx477@1a {
+		    status = "okay";
+		    compatible = "sony,imx477";
+		    pinctrl-names = "default";
+		    pinctrl-0 = <&lsio_gpio1_6>;
+		    reset-gpios = <&ls_gpio1_porta 6 0>;	/* HIGH is ACTIVE LEVEL */
+		    reg = <0x1a>;
+        clocks = <&imx477_clk0>;
+        clock-names = "xclk";
+        
+        port {
+          /* MIPI CSI-2 bus endpoint */
+          imx477_to_mipi_csi0: endpoint {
+            remote-endpoint = <&x5_mipi_csi0_from_imx477>;
+            clock-lanes = <0>;
+            data-lanes = <1 2>;
+            link-frequencies = /bits/ 64 <450000000>;
+          };
+        };
+      };
+    };
+  };
+
+  fragment@3 {
+    target-path = "/soc/cam/csi@3d060000/";
+    __overlay__ {
+      status = "okay";
+
+      ports {
+        port {
+          x5_mipi_csi0_from_imx477: endpoint {
+            remote-endpoint = <&imx477_to_mipi_csi0>;
+            clock-lanes = <0>;
+            data-lanes = <1 2>;
+            lane-rate = <1125>;
+            vc_id = <0>;
+            stop_check_instart = <1>;
+          };
+        };
+      };
+    };
+  };
+};
+

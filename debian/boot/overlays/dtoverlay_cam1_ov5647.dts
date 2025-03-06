@@ -1,0 +1,66 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+  fragment@0 {
+    target-path = "/";
+    __overlay__ {
+      ov5647_clk1: ov5647_clk1 {
+        compatible = "fixed-clock";
+        #clock-cells = <0>;
+        status = "okay";
+        clock-frequency = <25000000>;
+      };
+    };
+  };
+
+  fragment@1 {
+    target-path = "/soc/a55_apb0/i2c@340f0000/";
+    __overlay__ {
+
+      #address-cells = <1>;
+      #size-cells = <0>;
+
+      ov5647@36 {
+        status = "okay";
+        compatible = "ovti,ov5647";
+        pinctrl-names = "default";
+        pinctrl-0 = <&lsio_gpio1_4>;
+        reset-gpios = <&ls_gpio1_porta 4 0>;	/* HIGH is ACTIVE LEVEL */
+        reg = <0x36>;
+        clocks = <&ov5647_clk1>;
+        clock-names = "xclk";
+        
+        port {
+          /* MIPI CSI-2 bus endpoint */
+          ov5647_to_mipi_csi2: endpoint {
+            remote-endpoint = <&x5_mipi_csi2_from_ov5647>;
+            clock-lanes = <0>;
+            data-lanes = <1 2>;
+            link-frequencies = /bits/ 64 <297000000>;
+          };
+        };
+      };
+    };
+  };
+
+  fragment@3 {
+    target-path = "/soc/cam/csi@3d080000/";
+    __overlay__ {
+      status = "okay";
+
+      ports {
+        port {
+          x5_mipi_csi2_from_ov5647: endpoint {
+            remote-endpoint = <&ov5647_to_mipi_csi2>;
+            clock-lanes = <0>;
+            data-lanes = <1 2>;
+            lane-rate = <500>;
+            vc_id = <0>;
+          };
+        };
+      };
+    };
+  };
+};
+

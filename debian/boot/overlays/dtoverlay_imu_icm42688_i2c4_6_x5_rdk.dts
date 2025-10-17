@@ -1,0 +1,29 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+
+  fragment@0 {
+    target-path = "/soc/a55_apb0/i2c@340f0000/";
+    __overlay__ {
+
+        icm42688@68 {
+            status = "okay";
+        };
+
+
+    };
+  };
+
+  fragment@1 {
+    target-path = "/soc/a55_apb0/i2c@341d0000/";
+    __overlay__ {
+
+        icm42688@68 {
+            status = "okay";
+        };
+    };
+  };
+
+};
+

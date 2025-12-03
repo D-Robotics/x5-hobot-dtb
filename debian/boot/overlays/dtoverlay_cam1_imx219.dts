@@ -57,6 +57,7 @@
             data-lanes = <1 2>;
             lane-rate = <1000>;
             vc_id = <0>;
+            stop_check_instart = <1>;
           };
         };
       };

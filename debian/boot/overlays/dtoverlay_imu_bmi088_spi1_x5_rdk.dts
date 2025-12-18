@@ -17,6 +17,21 @@
 
       status = "okay";
 
+      spidev@0
+      {
+        status = "disabled";
+      };
+      spidev@1
+      {
+        status = "disabled";
+      };
+      bmi08a@1{
+        status = "okay";
+      };
+      bmi08g@0{
+        status = "okay";
+      };
+
     };
   };
 

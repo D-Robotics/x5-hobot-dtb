@@ -6,10 +6,10 @@
     target-path = "/soc/a55_apb0/i2c@341c0000/";
     __overlay__ {
 
-      bmi08xa{
+      bmi08a:bmi08a@19{
         status = "okay";
       };
-      bmi08xg{
+      bmi08g:bmi08g@69{
         status = "okay";
       };
     };

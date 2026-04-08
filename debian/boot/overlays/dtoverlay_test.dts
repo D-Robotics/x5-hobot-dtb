@@ -1,0 +1,14 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+  fragment@0 {
+    target-path = "/";
+    __overlay__ {
+      dt_overlay_test {
+        compatible = "led_type_a";
+      };
+    };
+  };
+};
+

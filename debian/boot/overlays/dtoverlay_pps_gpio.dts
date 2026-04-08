@@ -1,0 +1,19 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+  fragment {
+    target-path = "/";
+    __overlay__ {
+      pps_gpio {
+        compatible = "pps-gpio";
+        pinctrl-names = "default";
+        pinctrl-0 = <&lsio_gpio0_2>;
+        gpios = <&ls_gpio0_porta 2 1>;
+        status = "okay";
+      };
+    };
+  };
+};
+
+

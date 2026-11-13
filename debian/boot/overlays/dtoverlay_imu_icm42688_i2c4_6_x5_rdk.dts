@@ -25,5 +25,23 @@
     };
   };
 
+  fragment@2 {
+    target-path = "/soc/a55_apb0/i2c@341d0000";
+    __overlay__ {
+
+        /* 400kHz fast mode: 100kHz caps DRDY handling at ~240Hz */
+        clock-frequency = <400000>;
+    };
+  };
+
+  fragment@3 {
+    target-path = "/soc/a55_apb0/i2c@340f0000";
+    __overlay__ {
+
+        /* same as i2c6: module may plug into either connector */
+        clock-frequency = <400000>;
+    };
+  };
+
 };
 
